@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='SPstyle.css') }}">
+</head>
+<body>
+    <div class="single-product-container">
+        <div class="product-image">
+            <img src="{{ url_for('static', filename=equipment.image_path) }}" alt="{{ equipment.name }}">
+        </div>
+        <div class="product-details">
+            <h1>{{ equipment.name }}</h1>
+            <p>Price: {{ equipment.price }}</p>
+            <p>{{ equipment.description }}</p>
+            
+            <!-- Start of form and flash messages container -->
+            <div class="form-and-flashes-container">
+                <form method="post" action="{{ url_for('singleProductPage', itemId=itemId) }}">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="quantity">{{ form.quantity.label }}</label>
+                        {{ form.quantity(class="quantity-selector") }}
+                        {{ form.submit(class="submit-button") }}
+                    </div>
+                </form>
+            
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="flashes">
+                            {% for message in messages %}
+                                <div class="flash-message">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!-- End of form and flash messages container -->
+            
+        </div>
+    </div>
+    </body>
+    </html>

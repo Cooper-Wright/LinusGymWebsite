@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+
+   
+    
+  
+</style>
+<body>
+    <h1 style="text-align: center;">Gym Equipment for Sale</h1>
+    <div class="item-container">
+        {% if equipment %}
+            {% for item in equipment %}
+                <div class="item">
+                    <a href="{{ url_for('singleProductPage', itemId=loop.index0) }}">
+                        <h2>{{ item.name }} - {{ item.price }}</h2>
+                        <img src="{{ url_for('static', filename=item.image_path) }}" alt="{{ item.name }}">
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No items found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
